@@ -2,11 +2,29 @@ from flask import Flask, render_template, request, url_for, redirect
 import google.generativeai as genai
 import get_api_key
 import random
+import os
 
 app = Flask(__name__)
 
 # Configure Gemini API
-genai.configure(api_key=get_api_key.api)
+# genai.configure(api_key=get_api_key.api)
+# genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+
+
+
+api_key = os.environ.get("GEMINI_API_KEY")
+
+if not api_key:
+    try:
+        import get_api_key
+        api_key = get_api_key.api
+    except Exception as e:
+        raise Exception("Gemini API key not found. Set GEMINI_API_KEY in Render or use get_api_key.py locally.")
+
+genai.configure(api_key=api_key)
+
+
+# here actual working start
 
 def call_gemini_api(prompt):
     """Call Gemini API and return the generated content"""

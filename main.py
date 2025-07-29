@@ -206,8 +206,4 @@ def get_compliment():
     return selected_prompt
 
 if __name__ == '__main__':
-    print("🚀 Gilhari's multilingual Flask server starting...")
-    print("📍 Visit: http://localhost:5000")
-    print("🤖 Desi vibes with Hindi/Haryanvi/Pahadi touch!")
-    print("🌟 All responses will be varied and informal")
     app.run(debug=True)
